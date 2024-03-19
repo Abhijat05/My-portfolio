@@ -16,8 +16,12 @@ body {
 
 .logo {
     position: absolute;
-    left: 50px;
-    top: 5px;
+    left: 70px;
+    top: 4px;
+}
+
+.logo a {
+    text-decoration: none;
     color: #16f2b3;
     font-size: 30px;
     font-weight: 700;
@@ -31,7 +35,7 @@ body {
 .navbar ul {
     margin-top: 20px;
     color: white;
-    margin-right: 50px;
+    margin-right: 70px;
     display: flex;
     justify-content: flex-end;
     font-weight: 500;
