@@ -58,7 +58,6 @@ body {
 
 .main {
     display: flex;
-    height: 100vh;
     color: white;
     font-size: 45px;
     font-weight: 700;
