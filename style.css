@@ -10,18 +10,24 @@ body {
     background-color: #0d1224;
 }
 
+.glow {
+    text-shadow: rgba(86, 201, 255, 0.37) 0px 0px 39px;
+}
+
 .logo {
-    position: absolute; 
-    left: 50px; 
-    top: 5px; 
+    position: absolute;
+    left: 50px;
+    top: 5px;
     color: #16f2b3;
     font-size: 30px;
     font-weight: 700;
     text-transform: uppercase;
 }
+
 .navbar {
-    position: relative; 
+    position: relative;
 }
+
 .navbar ul {
     margin-top: 20px;
     color: white;
@@ -34,14 +40,33 @@ body {
 .navbar ul li {
     list-style: none;
     margin: 10px 20px;
-    /* color: #ec4899; this is only for the hover effect */
 }
 
 .navbar ul li a {
     text-decoration: none;
     color: white;
     transition: 0.5s;
-}       
+}
+
 .navbar ul li a:hover {
     color: #ec4899;
+}
+
+.main {
+    display: flex;
+    height: 100vh;
+    color: white;
+    font-size: 45px;
+    font-weight: 700;
+    margin: 100px 80px;
+    line-height: 1.5;
+    /* text-shadow: rgba(86, 201, 255, 0.37) 0px 0px 39px; */
+}
+
+.pink-4899 {
+    color: #ec4899;
+}
+
+.green-2b3 {
+    color: #16f2b3;
 }
