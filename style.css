@@ -3,9 +3,6 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: "Exo 2", sans-serif;
-
-
 }
 
 body {
@@ -17,8 +14,8 @@ body {
     position: absolute; 
     left: 50px; 
     top: 5px; 
-    color: white;
-    font-size: 20px;
+    color: #16f2b3;
+    font-size: 30px;
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -37,4 +34,14 @@ body {
 .navbar ul li {
     list-style: none;
     margin: 10px 20px;
+    /* color: #ec4899; this is only for the hover effect */
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    transition: 0.5s;
+}       
+.navbar ul li a:hover {
+    color: #ec4899;
 }
