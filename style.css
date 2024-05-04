@@ -6,9 +6,20 @@
 }
 
 body {
+    height: 100vh;
     font-family: "Exo 2", sans-serif;
     background-color: #0d1224;
+    overflow-x: hidden;
     /* background-image: linear-gradient(120deg, #4f0088 0%, #000000 100%); */
+}
+
+.cursor {
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 50%;
+    position: fixed;
+    z-index: -1;
 }
 
 .glow {
@@ -18,7 +29,6 @@ body {
 .logo {
     position: absolute;
     left: 70px;
-    top: 4px;
 }
 
 .logo a {
@@ -31,10 +41,11 @@ body {
 
 .navbar {
     position: relative;
+    top: 30px;
+    width: 100%;
 }
 
 .navbar ul {
-    margin-top: 20px;
     color: white;
     margin-right: 70px;
     display: flex;
@@ -58,7 +69,11 @@ body {
 }
 
 .main {
-    display: flex;
+    padding-top: 50px;
+}
+
+.main .left {
+    /* display: flex; */
     color: white;
     font-size: 45px;
     font-weight: 700;
