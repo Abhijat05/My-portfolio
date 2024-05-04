@@ -8,6 +8,7 @@
 body {
     font-family: "Exo 2", sans-serif;
     background-color: #0d1224;
+    /* background-image: linear-gradient(120deg, #4f0088 0%, #000000 100%); */
 }
 
 .glow {
