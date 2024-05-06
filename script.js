@@ -11,6 +11,12 @@ gsap.from("li", {
     delay: 0.5,
     stagger: 0.2
 })
+gsap.from(".main .left", {
+    x: -30,
+    opacity: 0,
+    duration: 1,
+    delay: 1.5,
+})
 
 var body = document.querySelector("body")
 var cursor = document.querySelector(".cursor")
