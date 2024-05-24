@@ -99,10 +99,19 @@ body {
     text-decoration: none;
     left: 70px;
     top: -70px;
+    transition: all ease 0.5s;
+}
+.github img:hover{
+    scale: 1.15;
 }
 .linkedin img{
     position: relative;
     text-decoration: none;
     left: 90px;
     top: -63px;
+    transition: all ease 0.5s;
+}
+
+.linkedin img:hover{
+    scale: 1.15;
 }
