@@ -17,6 +17,13 @@ gsap.from(".main .left", {
     duration: 1,
     delay: 1.5,
 })
+gsap.from(".left-1 > div", {
+    y: -30,
+    opacity: 0,
+    duration: 1,
+    delay: 2,
+    stagger: 0.2
+})
 
 var body = document.querySelector("body")
 var cursor = document.querySelector(".cursor")
@@ -62,5 +69,18 @@ navItems.forEach(function (navItem) {
             scale: 1,
             backgroundColor: "white"
         })
+    })
+})
+
+var left_1 = document.querySelector(".left-1")
+left_1.addEventListener("mouseenter", function () {
+    gsap.to(cursor, {
+        opacity: 0
+    })
+})
+
+left_1.addEventListener("mouseleave", function () {
+    gsap.to(cursor, {
+        opacity: 1
     })
 })

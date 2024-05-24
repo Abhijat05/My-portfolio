@@ -89,3 +89,20 @@ body {
 .green-2b3 {
     color: #16f2b3;
 }
+
+.left-1{
+    display: flex;
+}
+
+.github img{
+    position: relative;
+    text-decoration: none;
+    left: 70px;
+    top: -70px;
+}
+.linkedin img{
+    position: relative;
+    text-decoration: none;
+    left: 90px;
+    top: -63px;
+}
