@@ -29,6 +29,14 @@ gsap.from(".left-1 > div", {
     stagger: 0.2,
 });
 
+gsap.from("button",{
+    y: -30,
+    opacity: 0,
+    duration: 1,
+    delay: 2.5,
+    stagger: 0.2,
+});
+
 // Custom cursor movement
 const body = document.querySelector("body");
 const cursor = document.querySelector(".cursor");
@@ -104,3 +112,4 @@ left1.addEventListener("mouseleave", () => {
         ease: "power3.out",
     });
 });
+

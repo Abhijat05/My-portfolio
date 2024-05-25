@@ -113,3 +113,126 @@ body {
 .linkedin img:hover {
     transform: scale(1.15);
 }
+.button {
+    position: relative;
+    top: -75px;
+}
+
+.button a {
+    text-decoration: none;
+}
+
+.button a:last-child {
+    position: absolute;
+    top: 0px;
+    left: 210px;
+}
+
+.button1 {
+    font-weight: bold;
+    color: white;
+    background-color: #ec4899;
+    padding: 1em 2em;
+    border: none;
+    border-radius: .6rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    left: 80px;
+}
+
+.button1 span:not(:nth-child(6)) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    width: 30px;
+    background-color: #16f2b3;
+    border-radius: 50%;
+    transition: .6s ease;
+}
+
+.button1 span:nth-child(6) {
+    position: relative;
+}
+
+.button1 span:nth-child(1) {
+    transform: translate(-3.3em, -4em);
+}
+
+.button1 span:nth-child(2) {
+    transform: translate(-6em, 1.3em);
+}
+
+.button1 span:nth-child(3) {
+    transform: translate(-.2em, 1.8em);
+}
+
+.button1 span:nth-child(4) {
+    transform: translate(3.5em, 1.4em);
+}
+
+.button1 span:nth-child(5) {
+    transform: translate(3.5em, -3.8em);
+}
+
+.button1:hover span:not(:nth-child(6)) {
+    transform: translate(-50%, -50%) scale(4);
+    transition: 1.5s ease;
+}
+
+.button2 {
+    font-weight: bold;
+    color: white;
+    background-color: #ec4899;
+    padding: 1em 2em;
+    border: none;
+    border-radius: .6rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+}
+
+.button2 span:not(:nth-child(6)) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    width: 32px;
+    background-color: #16f2b3;
+    border-radius: 50%;
+    transition: .6s ease;
+}
+
+.button2 span:nth-child(6) {
+    position: relative;
+}
+
+.button2 span:nth-child(1) {
+    transform: translate(-3.3em, -4em);
+}
+
+.button2 span:nth-child(2) {
+    transform: translate(-6em, 1.4em);
+}
+
+.button2 span:nth-child(3) {
+    transform: translate(-.2em, 1.8em);
+}
+
+.button2 span:nth-child(4) {
+    transform: translate(3.5em, 1.5em);
+}
+
+.button2 span:nth-child(5) {
+    transform: translate(3.5em, -3.8em);
+}
+
+.button2:hover span:not(:nth-child(6)) {
+    transform: translate(-50%, -50%) scale(4);
+    transition: 1.5s ease;
+}
