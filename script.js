@@ -29,7 +29,7 @@ gsap.from(".left-1 > div", {
     stagger: 0.2,
 });
 
-gsap.from("button",{
+gsap.from("button", {
     y: -30,
     opacity: 0,
     duration: 1,
