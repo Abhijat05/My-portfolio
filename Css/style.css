@@ -117,10 +117,13 @@ body {
 .button {
     position: relative;
     top: -65px;
+    display: flex;
 }
 
 .button a {
+    position: relative;
     text-decoration: none;
+    left: 80px; 
 }
 
 .button a:last-child {
@@ -140,7 +143,6 @@ body {
     cursor: pointer;
     overflow: hidden;
     display: flex;
-    left: 80px;
 }
 
 .button1 span:not(:nth-child(6)) {
