@@ -20,6 +20,12 @@ gsap.from(".main .left", {
     duration: 1,
     delay: 1.5,
 });
+gsap.from(".main .main-box", {
+    x: 40,
+    opacity: 0,
+    duration: 1,
+    delay: 1.5,
+});
 
 gsap.from(".left-1 > div", {
     y: -30,
