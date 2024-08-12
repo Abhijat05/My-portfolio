@@ -10,7 +10,7 @@ body {
     font-family: "Exo 2", sans-serif;
     background-color: #0d1224;
     overflow-x: hidden;
-    /* background-image: linear-gradient(120deg, #000000  0%, #4f0088 100%); */
+    background-image: linear-gradient(120deg, #000000  0%, #4f0088 100%);
 }
 
 .cursor {
@@ -123,7 +123,7 @@ body {
 .button a {
     position: relative;
     text-decoration: none;
-    left: 80px; 
+    left: 80px;
 }
 
 .button a:last-child {
@@ -238,4 +238,32 @@ body {
 .button2:hover span:not(:nth-child(6)) {
     transform: translate(-50%, -50%) scale(4);
     transition: 1.5s ease;
+}
+
+.right {
+    display: flex;
+}
+.main-box{
+    width: 45vw;
+    height: 60vh;
+    position: absolute;
+    top: 10em;
+    right: 5em;
+}
+.line{
+    height: 1px;
+    background-image: linear-gradient(120deg, #000000  0%, #4f0088 100%);
+}
+.right .inner-box1 {
+    width: 100%;
+    height: 13%;
+    border-radius: 5px 5px 0 0;
+    background-image: linear-gradient(120deg, #4f0088  0%, #000000 100%);
+}
+
+.right .inner-box2{
+    background-image: linear-gradient(120deg, #4f0088  0%, #000000 100%);
+    width: 100%;
+    height: 87%;
+    border-radius: 0 0 5px 5px;
 }
