@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-black text-gray-200;
+  font-family: 'Inter', sans-serif;
+}
+
+.code-block {
+  @apply bg-gray-900 p-4 rounded-md text-green-400 font-mono;
+}
+
+.glow-text {
+  text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);
+}
+
+.card-gradient {
+  @apply bg-gradient-to-br from-gray-900 to-gray-800;
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
