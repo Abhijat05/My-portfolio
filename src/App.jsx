@@ -11,7 +11,6 @@ import { ThemeProvider } from './context/ThemeContext'
 
 const App = () => {
   useEffect(() => {
-    // Add this to fix the backface-visibility issue in some browsers
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     
     const handleResize = () => {
@@ -27,12 +26,12 @@ const App = () => {
       <MatrixRain />
       <div className="min-h-screen flex flex-col bg-black text-gray-200">
         <Header />
-        <main className="flex-grow py-8 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <main className="flex-grow py-12 px-4 md:px-8 max-w-6xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="space-y-20"
+            className="space-y-28"
           >
             <AboutMe />
             
@@ -41,7 +40,7 @@ const App = () => {
             </section>
             
             <section id="projects">
-              <h2 className="text-2xl font-bold text-green-400 border-b border-green-700 pb-2 mb-8">
+              <h2 className="text-2xl font-bold text-green-400 border-b border-green-700 pb-2 mb-10">
                 <span className="font-mono">{'<'}</span> Projects <span className="font-mono">{'/'}</span><span className="font-mono">{'>'}</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -70,21 +69,21 @@ const App = () => {
             </section>
             
             <section id="contact" className="pb-12">
-              <h2 className="text-2xl font-bold text-green-400 border-b border-green-700 pb-2 mb-8">
+              <h2 className="text-2xl font-bold text-green-400 border-b border-green-700 pb-2 mb-10">
                 <span className="font-mono">{'<'}</span> Contact <span className="font-mono">{'/'}</span><span className="font-mono">{'>'}</span>
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="space-y-6">
-                  <p className="text-gray-300">
+                <div className="space-y-8">
+                  <p className="text-gray-300 text-lg">
                     Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
                   </p>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     <motion.a 
                       href="mailto:your.email@example.com"
                       className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors group"
-                      whileHover={{ x: 10 }}
+                      whileHover={{ x: 5 }}
                     >
                       <span className="text-green-400 text-xl">📧</span>
                       <span className="group-hover:underline">your.email@example.com</span>
@@ -95,7 +94,7 @@ const App = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors group"
-                      whileHover={{ x: 10 }}
+                      whileHover={{ x: 5 }}
                     >
                       <span className="text-green-400 text-xl">💻</span>
                       <span className="group-hover:underline">github.com/yourusername</span>
@@ -106,7 +105,7 @@ const App = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors group"
-                      whileHover={{ x: 10 }}
+                      whileHover={{ x: 5 }}
                     >
                       <span className="text-green-400 text-xl">🔗</span>
                       <span className="group-hover:underline">linkedin.com/in/yourusername</span>
