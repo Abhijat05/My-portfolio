@@ -2,9 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-primary: #000000;
+  --text-primary: #e5e7eb;
+  --accent: #4ade80;
+  --accent-dark: #15803d;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --text-primary: #1f2937;
+  --accent: #16a34a;
+  --accent-dark: #15803d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-black text-gray-200;
   font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .code-block {
@@ -25,4 +45,82 @@ body {
 
 .backface-hidden {
   backface-visibility: hidden;
+}
+
+/* Fix for mobile viewport height */
+.min-h-screen {
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
+/* Theme transitions */
+body, 
+.bg-black, 
+.bg-gray-900, 
+.bg-gray-800, 
+.text-gray-200, 
+.text-gray-300,
+.text-gray-400 {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] .bg-black {
+  background-color: #f8fafc;
+}
+
+[data-theme="light"] .bg-gray-900 {
+  background-color: #f1f5f9;
+}
+
+[data-theme="light"] .bg-gray-800 {
+  background-color: #e2e8f0;
+}
+
+[data-theme="light"] .text-gray-200 {
+  color: #1f2937;
+}
+
+[data-theme="light"] .text-gray-300 {
+  color: #374151;
+}
+
+[data-theme="light"] .text-gray-400 {
+  color: #4b5563;
+}
+
+[data-theme="light"] .border-gray-700 {
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .code-block {
+  background-color: #f1f5f9;
+  color: #16a34a;
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .terminal-content {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+[data-theme="light"] .terminal-header {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+/* Add more precise theme transitions */
+.theme-transition {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Add CSS for preserving 3D transformations */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective {
+  perspective: 1000px;
 }
