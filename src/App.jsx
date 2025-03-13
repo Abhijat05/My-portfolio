@@ -1,15 +1,46 @@
-import React, { useEffect } from 'react'
-import { motion } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import ProjectCard from './components/ProjectCard'
-import AboutMe from './components/AboutMe'
-import Skills from './components/Skills'
+import HomePage from './pages/HomePage'
+import ProjectsPage from './pages/ProjectsPage'
+import SkillsPage from './pages/SkillsPage'
+import ContactPage from './pages/ContactPage'
 import Terminal from './components/Terminal'
-import MatrixRain from './components/MatrixRain'
-import { ThemeProvider } from './context/ThemeContext'
+import InitSequence from './components/InitSequence'
+import { ThemeProvider, useTheme } from './context/ThemeContext'
+import NotFoundPage from './pages/NotFoundPage'
 
-const App = () => {
+
+const ThemedContent = () => {
+  const { theme } = useTheme();
+  const location = useLocation();
+  const [showTerminalOverlay, setShowTerminalOverlay] = useState(false);
+  const [initialized, setInitialized] = useState(false);
+  
+  // Check if this is the first visit in current session
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
+  
+  useEffect(() => {
+    // Check if we've already initialized during this session
+    const hasInitialized = sessionStorage.getItem('initialized');
+    if (hasInitialized) {
+      setInitialized(true);
+      setIsFirstVisit(false);
+    } else {
+      // On first visit, start with initialization sequence
+      setInitialized(false);
+      setIsFirstVisit(true);
+    }
+  }, []);
+  
+  const handleInitComplete = () => {
+    setInitialized(true);
+    // Save initialization state to session storage
+    sessionStorage.setItem('initialized', 'true');
+  };
+  
   useEffect(() => {
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     
@@ -17,113 +48,99 @@ const App = () => {
       document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     };
     
+    
+    const handleKeyDown = (e) => {
+      
+      if ((e.ctrlKey || e.metaKey) && e.key === 't') {
+        e.preventDefault();
+        setShowTerminalOverlay(prev => !prev);
+      }
+      
+      else if (e.key === 'Escape' && showTerminalOverlay) {
+        setShowTerminalOverlay(false);
+      }
+    };
+    
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showTerminalOverlay]);
+  
+  if (isFirstVisit && !initialized) {
+    return <InitSequence onComplete={handleInitComplete} />;
+  }
   
   return (
-    <ThemeProvider>
-      <MatrixRain />
-      <div className="min-h-screen flex flex-col bg-black text-gray-200">
-        <Header />
-        <main className="flex-grow py-12 px-4 md:px-8 max-w-6xl mx-auto w-full">
-          <motion.div
+    <div className={`min-h-screen flex flex-col ${theme === 'dark' ? 'bg-black' : 'bg-gray-50'} ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
+      <Header />
+      <main className="flex-grow py-12 px-4 md:px-8 max-w-6xl mx-auto w-full">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </AnimatePresence>
+      </main>
+      <Footer />
+      
+      {/* Terminal shortcut hint */}
+      <div className="fixed bottom-4 right-4">
+        <motion.button 
+          className="bg-gray-800 text-gray-300 px-3 py-2 rounded-md text-sm flex items-center space-x-2 shadow-lg"
+          onClick={() => setShowTerminalOverlay(true)}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span className="text-green-400">{'>'}</span>
+          <span>Terminal</span>
+          <span className="text-xs text-gray-500 ml-2">(Ctrl+T)</span>
+        </motion.button>
+      </div>
+      
+      <AnimatePresence>
+        {showTerminalOverlay && (
+          <motion.div 
+            className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-28"
+            exit={{ opacity: 0 }}
+            onClick={() => setShowTerminalOverlay(false)}
           >
-            <AboutMe />
-            
-            <section id="skills">
-              <Skills />
-            </section>
-            
-            <section id="projects">
-              <h2 className="text-2xl font-bold text-green-400 border-b border-green-700 pb-2 mb-10">
-                <span className="font-mono">{'<'}</span> Projects <span className="font-mono">{'/'}</span><span className="font-mono">{'>'}</span>
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <ProjectCard 
-                  title="Algorithmic Trading Bot" 
-                  description="Python-based trading algorithm using machine learning for market prediction" 
-                  link="#"
-                  github="https://github.com/yourusername/trading-bot"
-                  technologies={['Python', 'TensorFlow', 'Pandas']} 
-                />
-                <ProjectCard 
-                  title="Personal Task Manager" 
-                  description="React application with Redux for state management and user authentication" 
-                  link="#" 
-                  github="https://github.com/yourusername/task-manager"
-                  technologies={['React', 'Redux', 'Firebase']} 
-                />
-                <ProjectCard 
-                  title="API Development" 
-                  description="RESTful API built with Node.js and Express with MongoDB integration" 
-                  link="#" 
-                  github="https://github.com/yourusername/api-project"
-                  technologies={['Node.js', 'Express', 'MongoDB']} 
-                />
-              </div>
-            </section>
-            
-            <section id="contact" className="pb-12">
-              <h2 className="text-2xl font-bold text-green-400 border-b border-green-700 pb-2 mb-10">
-                <span className="font-mono">{'<'}</span> Contact <span className="font-mono">{'/'}</span><span className="font-mono">{'>'}</span>
-              </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="space-y-8">
-                  <p className="text-gray-300 text-lg">
-                    Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
-                  </p>
-                  
-                  <div className="space-y-6">
-                    <motion.a 
-                      href="mailto:your.email@example.com"
-                      className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors group"
-                      whileHover={{ x: 5 }}
-                    >
-                      <span className="text-green-400 text-xl">📧</span>
-                      <span className="group-hover:underline">your.email@example.com</span>
-                    </motion.a>
-                    
-                    <motion.a 
-                      href="https://github.com/yourusername"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors group"
-                      whileHover={{ x: 5 }}
-                    >
-                      <span className="text-green-400 text-xl">💻</span>
-                      <span className="group-hover:underline">github.com/yourusername</span>
-                    </motion.a>
-                    
-                    <motion.a 
-                      href="https://linkedin.com/in/yourusername"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors group"
-                      whileHover={{ x: 5 }}
-                    >
-                      <span className="text-green-400 text-xl">🔗</span>
-                      <span className="group-hover:underline">linkedin.com/in/yourusername</span>
-                    </motion.a>
-                  </div>
-                </div>
-                
-                <div>
-                  <Terminal />
-                </div>
-              </div>
-            </section>
+            <motion.div 
+              className="w-full max-w-3xl"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Terminal />
+              <p className="text-center text-gray-500 text-xs mt-2">
+                Press <span className="bg-gray-800 text-gray-300 px-1 rounded">ESC</span> to close
+              </p>
+            </motion.div>
           </motion.div>
-        </main>
-        <Footer />
-      </div>
-    </ThemeProvider>
-  )
-}
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
-export default App
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <Router>
+        <ThemedContent />
+      </Router>
+    </ThemeProvider>
+  );
+};
+
+export default App;
