@@ -1,5 +1,49 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
+const SkillCard = ({ icon, name, description, color }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  
+  return (
+    <div className="perspective">
+      <motion.div
+        className="relative w-full h-40 preserve-3d cursor-pointer"
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.6 }}
+        onClick={() => setIsFlipped(!isFlipped)}
+      >
+        {/* Front of card */}
+        <motion.div
+          className="absolute inset-0 backface-hidden rounded-lg border border-gray-700 bg-gray-800 p-4 flex flex-col items-center justify-center"
+          style={{ zIndex: isFlipped ? 0 : 1 }}
+        >
+          <div className="text-3xl mb-2" style={{ color }}>
+            {icon}
+          </div>
+          <h3 className="text-lg font-bold text-green-400">{name}</h3>
+          <p className="text-sm text-center text-gray-400 mt-1">Click to learn more</p>
+        </motion.div>
+        
+        {/* Back of card */}
+        <motion.div
+          className="absolute inset-0 backface-hidden rounded-lg border border-gray-700 bg-gray-800 p-4 flex flex-col justify-center"
+          style={{ transform: 'rotateY(180deg)', zIndex: isFlipped ? 1 : 0 }}
+        >
+          <p className="text-gray-300 text-sm">{description}</p>
+          <button
+            className="mt-3 text-xs text-green-400 hover:underline self-end"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsFlipped(false);
+            }}
+          >
+            Flip back
+          </button>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
 
 const Skills = () => {
   const skills = [
@@ -11,7 +55,46 @@ const Skills = () => {
     { name: 'MongoDB', level: 75, color: '#4DB33D' },
     { name: 'TypeScript', level: 75, color: '#3178C6' },
     { name: 'Git', level: 80, color: '#F05032' }
-  ]
+  ];
+
+  const skillCards = [
+    { 
+      icon: <i className="devicon-javascript-plain"></i>,
+      name: 'JavaScript', 
+      description: 'Modern ES6+ JavaScript for dynamic, interactive web applications with emphasis on functional programming patterns.',
+      color: '#F7DF1E' 
+    },
+    { 
+      icon: <i className="devicon-react-original"></i>,
+      name: 'React', 
+      description: 'Building reusable component-based UIs with React hooks, context API, and efficient state management.',
+      color: '#61DAFB' 
+    },
+    { 
+      icon: <i className="devicon-nodejs-plain"></i>,
+      name: 'Node.js', 
+      description: 'Server-side JavaScript with Express for RESTful APIs, middleware integration, and full-stack development.',
+      color: '#68A063' 
+    },
+    { 
+      icon: <i className="devicon-html5-plain"></i>,
+      name: 'HTML/CSS', 
+      description: 'Semantic HTML5 markup with modern CSS (Grid, Flexbox) for responsive layouts and animations.',
+      color: '#E34F26' 
+    },
+    { 
+      icon: <i className="devicon-tailwindcss-plain"></i>,
+      name: 'TailwindCSS', 
+      description: 'Utility-first CSS framework for rapid UI development with consistent design systems.',
+      color: '#38B2AC' 
+    },
+    { 
+      icon: <i className="devicon-mongodb-plain"></i>,
+      name: 'MongoDB', 
+      description: 'NoSQL database design with schema modeling, aggregation pipelines, and Atlas cloud integration.',
+      color: '#4DB33D' 
+    },
+  ];
   
   return (
     <section className="py-12">
@@ -99,6 +182,23 @@ function continousLearning() {
   return currentlyLearning.concat(nextToLearn);
 }`}
         </pre>
+      </div>
+
+      <div className="mt-16">
+        <h3 className="text-xl font-bold mb-8 text-gray-200">Explore My Skills</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillCards.map((skill, index) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <SkillCard {...skill} />
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )

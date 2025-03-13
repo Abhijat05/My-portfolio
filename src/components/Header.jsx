@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
+import { NavLink, useLocation } from 'react-router-dom'
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false)
-  const [activeLink, setActiveLink] = useState('Home')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [typingEffect, setTypingEffect] = useState('')
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
   
   // Handle scroll effect
   useEffect(() => {
@@ -65,12 +66,30 @@ const Header = () => {
     const timer = setTimeout(type, 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // Apply the theme class to the body element
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  }, [theme]);
   
-  const navItems = ['Home', 'Projects', 'Skills', 'Contact']
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Skills', path: '/skills' },
+    { name: 'Contact', path: '/contact' }
+  ]
   
   return (
     <motion.header 
-      className={`sticky top-0 z-50 py-4 px-6 bg-gray-900/90 backdrop-blur-sm text-white ${
+      className={`sticky top-0 z-50 py-4 px-6 ${
+        theme === 'dark' ? 'bg-gray-900/90' : 'bg-gray-100/90'
+      } backdrop-blur-sm ${
+        theme === 'dark' ? 'text-white' : 'text-gray-800'
+      } ${
         scrolled ? 'shadow-md shadow-black/20' : ''
       }`}
       initial={{ y: -100 }}
@@ -79,21 +98,23 @@ const Header = () => {
     >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center w-full md:w-auto justify-between">
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-green-400">
-              <span className="hidden md:inline font-mono">{'<'}</span>
-              <span className="glow-text">Abhijat</span>
-              <span className="hidden md:inline font-mono">{' />'}</span>
-            </h1>
-            <p className="text-sm text-gray-400 font-mono hidden md:block mt-1">
-              <span className="text-pink-400">const</span> role = <span className="text-amber-300">"{typingEffect}"</span>
-              <motion.span 
-                className="inline-block bg-green-400 w-1 h-4 ml-1 align-middle"
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ repeat: Infinity, duration: 0.8 }}
-              />
-            </p>
-          </div>
+          <NavLink to="/">
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold text-green-400">
+                <span className="hidden md:inline font-mono">{'<'}</span>
+                <span className="glow-text">Abhijat</span>
+                <span className="hidden md:inline font-mono">{' />'}</span>
+              </h1>
+              <p className="text-sm font-mono hidden md:block mt-1" style={{ color: theme === 'dark' ? '#9CA3AF' : '#4B5563' }}>
+                <span style={{ color: theme === 'dark' ? '#F472B6' : '#DB2777' }}>const</span> role = <span style={{ color: theme === 'dark' ? '#FCD34D' : '#D97706' }}>"{typingEffect}"</span>
+                <motion.span 
+                  className="inline-block bg-green-400 w-1 h-4 ml-1 align-middle"
+                  animate={{ opacity: [1, 0, 1] }}
+                  transition={{ repeat: Infinity, duration: 0.8 }}
+                />
+              </p>
+            </div>
+          </NavLink>
           
           <motion.button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -122,31 +143,75 @@ const Header = () => {
         <nav className="hidden md:block mt-4 md:mt-0">
           <ul className="flex items-center space-x-6">
             {navItems.map((item) => (
-              <motion.li key={item} whileHover={{ scale: 1.05 }}>
-                <a 
-                  href={`#${item.toLowerCase()}`} 
-                  className={`px-3 py-2 text-base transition-colors relative ${activeLink === item ? 'text-green-400' : 'text-gray-300 hover:text-green-400'}`}
-                  onClick={() => setActiveLink(item)}
+              <motion.li key={item.name} whileHover={{ scale: 1.05 }}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) => `px-3 py-2 text-base transition-colors relative ${
+                    isActive
+                      ? 'text-green-400' 
+                      : theme === 'dark' 
+                        ? 'text-gray-300 hover:text-green-400' 
+                        : 'text-gray-600 hover:text-green-600'
+                  }`}
                 >
-                  {activeLink === item && (
-                    <motion.span 
-                      className="absolute inset-0 bg-green-900/20 rounded-md z-[-1]"
-                      layoutId="activeNavItem"
-                      transition={{ type: 'spring', duration: 0.6 }}
-                    />
+                  {({ isActive }) => (
+                    <>
+                      {isActive && (
+                        <motion.span 
+                          className={`absolute inset-0 ${
+                            theme === 'dark' ? 'bg-green-900/20' : 'bg-green-100'
+                          } rounded-md z-[-1]`}
+                          layoutId="activeNavItem"
+                          transition={{ type: 'spring', duration: 0.6 }}
+                        />
+                      )}
+                      {item.name}
+                    </>
                   )}
-                  {item}
-                </a>
+                </NavLink>
               </motion.li>
             ))}
             
             <motion.li whileHover={{ scale: 1.05 }}>
               <motion.button
                 onClick={toggleTheme}
-                className="px-3 py-1 rounded bg-gray-800 text-gray-300 text-sm hover:text-green-400 transition-colors"
+                className={`relative px-3 py-1 rounded ${
+                  theme === 'dark' 
+                    ? 'bg-gray-800 text-gray-300' 
+                    : 'bg-gray-200 text-gray-700'
+                } text-sm hover:text-green-400 transition-colors flex items-center gap-2`}
                 whileTap={{ scale: 0.95 }}
               >
-                {theme === 'dark' ? 'Matrix' : 'Dark'}
+                <motion.div
+                  initial={false}
+                  animate={{ 
+                    rotate: theme === 'dark' ? 0 : 180,
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-5 h-5"
+                >
+                  {theme === 'dark' ? (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      ☀️
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      🌙
+                    </motion.span>
+                  )}
+                </motion.div>
+                <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
               </motion.button>
             </motion.li>
           </ul>
@@ -162,25 +227,30 @@ const Header = () => {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="bg-gray-800 rounded-md overflow-hidden shadow-lg">
-                <ul className="divide-y divide-gray-700/50">
+              <div className={`${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'} rounded-md overflow-hidden shadow-lg`}>
+                <ul className={`divide-y ${theme === 'dark' ? 'divide-gray-700/50' : 'divide-gray-300/50'}`}>
                   {navItems.map((item) => (
                     <motion.li 
-                      key={item}
+                      key={item.name}
                       initial={{ opacity: 0, x: -5 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: navItems.indexOf(item) * 0.1 }}
                     >
-                      <a 
-                        href={`#${item.toLowerCase()}`} 
-                        className={`block px-4 py-3 ${activeLink === item ? 'text-green-400 bg-green-900/10' : 'text-gray-300'}`}
-                        onClick={() => {
-                          setActiveLink(item);
-                          setMobileMenuOpen(false);
-                        }}
+                      <NavLink
+                        to={item.path}
+                        className={({ isActive }) => `block px-4 py-3 ${
+                          isActive
+                            ? theme === 'dark'
+                              ? 'text-green-400 bg-green-900/10' 
+                              : 'text-green-600 bg-green-100/50'
+                            : theme === 'dark'
+                              ? 'text-gray-300'
+                              : 'text-gray-600'
+                        }`}
+                        onClick={() => setMobileMenuOpen(false)}
                       >
-                        {item}
-                      </a>
+                        {item.name}
+                      </NavLink>
                     </motion.li>
                   ))}
                   <motion.li 
@@ -190,9 +260,9 @@ const Header = () => {
                   >
                     <button
                       onClick={toggleTheme}
-                      className="w-full text-left px-4 py-3 text-gray-300"
+                      className={`w-full text-left px-4 py-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
                     >
-                      {theme === 'dark' ? 'Matrix Mode' : 'Dark Mode'}
+                      {theme === 'dark' ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
                     </button>
                   </motion.li>
                 </ul>
@@ -212,4 +282,4 @@ const Header = () => {
   );
 }
 
-export default Header
+export default Header;

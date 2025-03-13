@@ -12,7 +12,7 @@ const Footer = () => {
   }, [])
   
   const formattedTime = time.toLocaleTimeString('en-US', { 
-    hour12: false,
+    hour12: true,
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit'
@@ -50,6 +50,13 @@ const Footer = () => {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 }
   }
+  
+  const resetInitialization = () => {
+    // Remove the initialized flag from session storage
+    sessionStorage.removeItem('initialized');
+    // Reload the page to trigger init sequence
+    window.location.reload();
+  };
 
   return (
     <footer className="p-6 bg-gray-900 text-gray-400 border-t border-green-700">
@@ -74,6 +81,15 @@ const Footer = () => {
             <p className="text-xs mt-2 font-mono text-center md:text-left">
               <span className="text-pink-400">const</span> <span className="text-blue-400">lastUpdated</span> = <span className="text-orange-400">"2023-05-25"</span>;
             </p>
+            
+            <motion.button
+              onClick={resetInitialization}
+              className="mt-2 text-xs text-green-400 hover:text-green-300 font-mono flex items-center"
+              whileHover={{ x: 3 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="mr-1">↺</span> Replay initialization
+            </motion.button>
           </div>
           
           <motion.div 
