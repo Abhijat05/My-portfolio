@@ -8,7 +8,6 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [typingEffect, setTypingEffect] = useState('')
   const { theme, toggleTheme } = useTheme();
-  const location = useLocation();
   
   // Handle scroll effect
   useEffect(() => {
@@ -25,12 +24,11 @@ const Header = () => {
     }
   }, [scrolled])
   
-  // Simplified typing effect
+  // Improved typing effect
   useEffect(() => {
     const titles = [
-      "Web Developer", 
-      "React Expert", 
-      "UI Designer", 
+      "Web Developer",
+      "UI/UX Designer",
       "Problem Solver"
     ]
     
@@ -69,11 +67,7 @@ const Header = () => {
 
   useEffect(() => {
     // Apply the theme class to the body element
-    if (theme === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
+    document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
   
   const navItems = [
@@ -85,12 +79,12 @@ const Header = () => {
   
   return (
     <motion.header 
-      className={`sticky top-0 z-50 py-4 px-6 ${
+      className={`sticky top-0 z-50 py-3 px-4 md:px-6 ${
         theme === 'dark' ? 'bg-gray-900/90' : 'bg-gray-100/90'
       } backdrop-blur-sm ${
         theme === 'dark' ? 'text-white' : 'text-gray-800'
       } ${
-        scrolled ? 'shadow-md shadow-black/20' : ''
+        scrolled ? 'shadow-md shadow-black/10' : ''
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -98,14 +92,31 @@ const Header = () => {
     >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center w-full md:w-auto justify-between">
-          <NavLink to="/">
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-green-400">
-                <span className="hidden md:inline font-mono">{'<'}</span>
-                <span className="glow-text">Abhijat</span>
-                <span className="hidden md:inline font-mono">{' />'}</span>
+          <NavLink to="/" className="group">
+            <div className="flex items-center">
+              <motion.div
+                className="hidden md:block text-green-400 font-mono mr-1"
+                animate={{ rotate: [0, -5, 0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 10 }}
+              >
+                {'<'}
+              </motion.div>
+              
+              <h1 className="text-2xl md:text-3xl font-bold text-green-400 glow-text group-hover:text-green-300 transition-colors duration-300">
+                Abhijat
               </h1>
-              <p className="text-sm font-mono hidden md:block mt-1" style={{ color: theme === 'dark' ? '#9CA3AF' : '#4B5563' }}>
+              
+              <motion.div
+                className="hidden md:block text-green-400 font-mono ml-1"
+                animate={{ rotate: [0, 5, 0, -5, 0] }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 10 }}
+              >
+                {' />'}
+              </motion.div>
+            </div>
+            
+            <div className="hidden md:flex items-center h-6 mt-1 overflow-hidden">
+              <p className="text-sm font-mono" style={{ color: theme === 'dark' ? '#9CA3AF' : '#4B5563' }}>
                 <span style={{ color: theme === 'dark' ? '#F472B6' : '#DB2777' }}>const</span> role = <span style={{ color: theme === 'dark' ? '#FCD34D' : '#D97706' }}>"{typingEffect}"</span>
                 <motion.span 
                   className="inline-block bg-green-400 w-1 h-4 ml-1 align-middle"
@@ -141,12 +152,12 @@ const Header = () => {
         
         {/* Desktop navigation */}
         <nav className="hidden md:block mt-4 md:mt-0">
-          <ul className="flex items-center space-x-6">
+          <ul className="flex items-center space-x-4">
             {navItems.map((item) => (
               <motion.li key={item.name} whileHover={{ scale: 1.05 }}>
                 <NavLink
                   to={item.path}
-                  className={({ isActive }) => `px-3 py-2 text-base transition-colors relative ${
+                  className={({ isActive }) => `px-3 py-2 text-base transition-colors relative rounded-md ${
                     isActive
                       ? 'text-green-400' 
                       : theme === 'dark' 
@@ -172,46 +183,28 @@ const Header = () => {
               </motion.li>
             ))}
             
-            <motion.li whileHover={{ scale: 1.05 }}>
+            <motion.li 
+              whileHover={{ scale: 1.05 }}
+              className="ml-2"
+            >
               <motion.button
                 onClick={toggleTheme}
-                className={`relative px-3 py-1 rounded ${
+                className={`relative px-3 py-1 rounded-full ${
                   theme === 'dark' 
-                    ? 'bg-gray-800 text-gray-300' 
-                    : 'bg-gray-200 text-gray-700'
-                } text-sm hover:text-green-400 transition-colors flex items-center gap-2`}
+                    ? 'bg-gray-800 hover:bg-gray-700' 
+                    : 'bg-gray-200 hover:bg-gray-300'
+                } text-sm transition-colors flex items-center gap-2`}
                 whileTap={{ scale: 0.95 }}
               >
                 <motion.div
                   initial={false}
                   animate={{ 
                     rotate: theme === 'dark' ? 0 : 180,
-                    scale: [1, 1.2, 1]
                   }}
                   transition={{ duration: 0.5 }}
-                  className="relative w-5 h-5"
                 >
-                  {theme === 'dark' ? (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      ☀️
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      🌙
-                    </motion.span>
-                  )}
+                  {theme === 'dark' ? '☀️' : '🌙'}
                 </motion.div>
-                <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
               </motion.button>
             </motion.li>
           </ul>
@@ -259,10 +252,14 @@ const Header = () => {
                     transition={{ delay: 0.4 }}
                   >
                     <button
-                      onClick={toggleTheme}
-                      className={`w-full text-left px-4 py-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
+                      onClick={() => {
+                        toggleTheme();
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'} flex items-center`}
                     >
-                      {theme === 'dark' ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
+                      <span className="mr-2">{theme === 'dark' ? '☀️' : '🌙'}</span>
+                      {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
                     </button>
                   </motion.li>
                 </ul>
@@ -273,7 +270,7 @@ const Header = () => {
       </div>
       
       <motion.div 
-        className="h-px bg-green-500/30 absolute bottom-0 left-0 right-0"
+        className="h-px bg-gradient-to-r from-transparent via-green-500/30 to-transparent absolute bottom-0 left-0 right-0"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 0.8 }}
