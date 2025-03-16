@@ -44,7 +44,7 @@ const AboutMe = () => {
           </p>
           
           <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}>
-            My journey in web development started 5 years ago, and I've been crafting digital experiences that are both functional and beautiful ever since. I'm driven by the challenge of solving complex problems and creating intuitive user interfaces.
+            My journey in web development started 1 years ago, and I've been crafting digital experiences that are both functional and beautiful ever since. I'm driven by the challenge of solving complex problems and creating intuitive user interfaces.
           </p>
           
           <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-gray-800/50' : 'bg-gray-100'} mt-6`}>
@@ -72,53 +72,53 @@ const AboutMe = () => {
           </div>
           
           <motion.div 
-            className={`code-block mt-8 ${theme === 'dark' ? '' : 'bg-gray-800'}`}
+            className={`code-block mt-8 ${theme === 'dark' ? '' : 'bg-gray-800'} overflow-x-auto rounded-lg`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <pre className="text-white">
+            <pre className="text-white p-4 text-xs sm:text-sm md:text-base whitespace-pre-wrap">
               <span className="text-pink-500">const</span> 
-              <span className="text-blue-400">abhijat</span> 
+              <span className="text-blue-400"> abhijat</span> 
               <span className="text-white"> = </span>
               <span className="text-yellow-300">{'{'}</span><br/>
-              <span className="ml-4 text-blue-300">role</span>
-              <span className="text-white">: </span>
+              <span className="ml-2 md:ml-4 text-blue-300">role:</span>
+              <span className="text-white"> </span>
               <span className="text-green-300">'Full-Stack Developer'</span>
               <span className="text-white">,</span><br/>
-              <span className="ml-4 text-blue-300">languages</span>
-              <span className="text-white">: </span>
+              <span className="ml-2 md:ml-4 text-blue-300">languages:</span>
+              <span className="text-white"> </span>
               <span className="text-yellow-300">[</span>
               <span className="text-green-300">'JavaScript'</span>
-              <span className="text-white">, </span>
+              <span className="text-white">,</span>
               <span className="text-green-300">'TypeScript'</span>
-              <span className="text-white">, </span>
+              <span className="text-white">,</span>
               <span className="text-green-300">'Python'</span>
               <span className="text-yellow-300">]</span>
               <span className="text-white">,</span><br/>
-              <span className="ml-4 text-blue-300">frameworks</span>
-              <span className="text-white">: </span>
+              <span className="ml-2 md:ml-4 text-blue-300">frameworks:</span>
+              <span className="text-white"> </span>
               <span className="text-yellow-300">[</span>
               <span className="text-green-300">'React'</span>
-              <span className="text-white">, </span>
+              <span className="text-white">,</span>
               <span className="text-green-300">'Node.js'</span>
-              <span className="text-white">, </span>
+              <span className="text-white">,</span>
               <span className="text-green-300">'Express'</span>
               <span className="text-yellow-300">]</span>
               <span className="text-white">,</span><br/>
-              <span className="ml-4 text-blue-300">interests</span>
-              <span className="text-white">: </span>
+              <span className="ml-2 md:ml-4 text-blue-300">interests:</span>
+              <span className="text-white"> </span>
               <span className="text-yellow-300">[</span>
               <span className="text-green-300">'Web Dev'</span>
-              <span className="text-white">, </span>
+              <span className="text-white">,</span>
               <span className="text-green-300">'UI/UX'</span>
-              <span className="text-white">, </span>
+              <span className="text-white">,</span>
               <span className="text-green-300">'Open Source'</span>
               <span className="text-yellow-300">]</span>
               <span className="text-white">,</span><br/>
-              <span className="ml-4 text-blue-300">currentFocus</span>
-              <span className="text-white">: </span>
-              <span className="text-green-300">'Building performant web applications'</span><br/>
+              <span className="ml-2 md:ml-4 text-blue-300">currentFocus:</span>
+              <span className="text-white"> </span>
+              <span className="text-green-300">'Building apps'</span><br/>
               <span className="text-yellow-300">{'}'}</span>
               <span className="text-white">;</span>
             </pre>
@@ -169,7 +169,7 @@ const AboutMe = () => {
                   I started my journey in tech with a deep curiosity about how websites work. This led me to pursue formal education in Computer Science, where I discovered my passion for web development.
                 </p>
                 <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}>
-                  Over the years, I've worked with startups and established companies alike, helping them build robust web applications and intuitive user interfaces.
+                  I'm currently focused on building my skills in modern web technologies like React, Node.js, and cloud platforms. My goal is to become a versatile full-stack developer capable of creating end-to-end solutions.
                 </p>
                 <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}>
                   My approach combines technical knowledge with creative problem-solving, allowing me to develop solutions that are both functional and visually appealing.
@@ -188,26 +188,39 @@ const AboutMe = () => {
                 <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-gray-200'}`}>
                   <div className="flex justify-between items-start">
                     <div>
-                      <h4 className="font-bold text-green-400">Bachelor of Technology</h4>
-                      <p className="text-sm">Computer Science & Engineering</p>
+                      <h4 className="font-bold text-green-400">B.Tech in Computer Science Engineering</h4>
+                      <p className="text-sm">Specialization in Cloud Computing</p>
                     </div>
-                    <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>2017-2021</span>
+                    <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>2022-2026</span>
                   </div>
                   <p className={`mt-2 text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
-                    Delhi Technological University (DTU)
+                    SRM Institute of Science and Technology
                   </p>
                 </div>
                 
                 <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-gray-200'}`}>
                   <div className="flex justify-between items-start">
                     <div>
-                      <h4 className="font-bold text-green-400">Web Development Certification</h4>
-                      <p className="text-sm">Full-Stack Web Development</p>
+                      <h4 className="font-bold text-green-400">Higher Secondary Education</h4>
+                      <p className="text-sm">Science & Mathematics</p>
                     </div>
-                    <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>2019</span>
+                    <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>2020-2022</span>
                   </div>
                   <p className={`mt-2 text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
-                    FreeCodeCamp
+                    Sri Chaitanya College of Education
+                  </p>
+                </div>
+                
+                <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-gray-200'}`}>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h4 className="font-bold text-green-400">Secondary Education</h4>
+                      <p className="text-sm">CBSE</p>
+                    </div>
+                    <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>2010-2020</span>
+                  </div>
+                  <p className={`mt-2 text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
+                    Kendriya Vidyalaya Sangathan
                   </p>
                 </div>
               </motion.div>
@@ -221,34 +234,17 @@ const AboutMe = () => {
                 transition={{ duration: 0.3 }}
                 className="space-y-6"
               >
-                <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-gray-200'}`}>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h4 className="font-bold text-green-400">Senior Frontend Developer</h4>
-                      <p className="text-sm">TechCorp Solutions</p>
-                    </div>
-                    <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>2021-Present</span>
-                  </div>
-                  <ul className="mt-3 space-y-1 list-disc list-inside text-sm">
-                    <li>Led development of company's flagship SaaS platform</li>
-                    <li>Implemented modern React architecture with Redux</li>
-                    <li>Improved loading performance by 40%</li>
-                  </ul>
-                </div>
                 
-                <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-gray-200'}`}>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h4 className="font-bold text-green-400">Junior Web Developer</h4>
-                      <p className="text-sm">StartupX</p>
-                    </div>
-                    <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>2019-2021</span>
+                <div className={`p-6 rounded-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-green-900/30' : 'bg-green-50 border-green-100'}`}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 ${theme === 'dark' ? 'text-green-400' : 'text-green-500'}`} viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                    </svg>
+                    <h4 className={`font-medium ${theme === 'dark' ? 'text-green-400' : 'text-green-600'}`}>Looking for Opportunities</h4>
                   </div>
-                  <ul className="mt-3 space-y-1 list-disc list-inside text-sm">
-                    <li>Developed responsive UIs for mobile-first applications</li>
-                    <li>Built RESTful APIs with Node.js and Express</li>
-                    <li>Collaborated with UX designers to implement new features</li>
-                  </ul>
+                  <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                    I'm actively seeking internships and entry-level positions where I can apply my skills and grow as a developer.
+                  </p>
                 </div>
               </motion.div>
             )}
@@ -298,46 +294,6 @@ const AboutMe = () => {
         </motion.div>
       </div>
       
-      {/* Call to action */}
-      <motion.div
-        className={`mt-16 p-6 rounded-lg text-center ${theme === 'dark' ? 'bg-green-900/20 border border-green-800/50' : 'bg-green-50 border border-green-100'}`}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <h3 className={`text-xl font-bold mb-3 ${theme === 'dark' ? 'text-green-400' : 'text-green-600'}`}>
-          Interested in working together?
-        </h3>
-        <p className="mb-5">
-          I'm currently available for freelance projects or full-time opportunities.
-        </p>
-        <div className="flex justify-center gap-4">
-          <motion.a 
-            href="/contact"
-            className={`px-6 py-2 rounded-md font-medium ${
-              theme === 'dark' 
-                ? 'bg-green-600 hover:bg-green-700 text-white' 
-                : 'bg-green-500 hover:bg-green-600 text-white'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Contact Me
-          </motion.a>
-          <motion.a 
-            href="/projects"
-            className={`px-6 py-2 rounded-md font-medium ${
-              theme === 'dark' 
-                ? 'bg-transparent border border-green-600 text-green-400 hover:bg-green-900/20' 
-                : 'bg-transparent border border-green-500 text-green-600 hover:bg-green-50'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View My Work
-          </motion.a>
-        </div>
-      </motion.div>
     </section>
   )
 }

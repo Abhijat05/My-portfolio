@@ -55,16 +55,6 @@ const Footer = () => {
               <i className="devicon-linkedin-plain text-2xl hover:text-green-400 transition-colors"></i>
               <span className="text-xs mt-1">LinkedIn</span>
             </motion.a>
-            <motion.a 
-              href="https://twitter.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="flex flex-col items-center"
-              whileHover={{ y: -5 }}
-            >
-              <i className="devicon-twitter-original text-2xl hover:text-green-400 transition-colors"></i>
-              <span className="text-xs mt-1">Twitter</span>
-            </motion.a>
           </div>
           
           <div>
