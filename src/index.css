@@ -19,10 +19,9 @@
 html {
   scroll-behavior: smooth;
 }
-
 body {
   @apply bg-black text-gray-200;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Brass Mono', sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
 }
