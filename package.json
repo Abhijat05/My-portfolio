@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "framer-motion": "^12.4.13",
+    "@barba/core": "^2.10.3",
+    "framer-motion": "^11.18.2",
+    "gsap": "^3.12.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
