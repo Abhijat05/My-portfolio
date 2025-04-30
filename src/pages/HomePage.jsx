@@ -7,6 +7,7 @@ import { SiLeetcode } from 'react-icons/si';
 import { HiArrowDown, HiCode, HiOutlineDocumentText } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import TextPressure from '../../Animation/TextPressure/TextPressure';
+import RotatingText from '../../Animation/RotatingText/RotatingText';
 
 const HomePage = () => {
   const { theme } = useTheme();
@@ -75,14 +76,31 @@ const HomePage = () => {
 
         {/* Main content */}
         <motion.div className="z-10 text-center">
+          {/* Enhanced rotating text with better styling */}
           <motion.div
-            className="inline-block mb-6 p-2 px-4 rounded-full bg-opacity-20 backdrop-blur-sm"
-            style={{ backgroundColor: theme === 'dark' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(16, 185, 129, 0.1)' }}
+            className={`inline-block mb-8 py-2 px-4 rounded-full ${theme === 'dark' ? 'bg-green-900/20' : 'bg-green-100/70'} border ${theme === 'dark' ? 'border-green-800/30' : 'border-green-200'} backdrop-blur-sm shadow-lg`}
             variants={itemVariants}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            <span className={`text-sm ${theme === 'dark' ? 'text-green-400' : 'text-green-600'}`}>
-              Full-Stack Developer
-            </span>
+            <div className="flex items-center">
+              <span className={`mr-2 ${theme === 'dark' ? 'text-green-500' : 'text-green-600'}`}>I'm a</span>
+              <RotatingText
+                texts={['Full-Stack Developer', 'UI/UX Designer', 'Cloud Engineer', 'Data Analyst']}
+                mainClassName={`px-2 overflow-hidden font-semibold py-0.5 justify-center ${theme === 'dark' ? 'text-green-400' : 'text-green-600'}`}
+                staggerFrom="first"
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-100%", opacity: 0 }}
+                staggerDuration={0.03}
+                splitBy="characters"
+                splitLevelClassName="overflow-hidden"
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                rotationInterval={3000}
+                elementLevelClassName="inline-block"
+              />
+            </div>
           </motion.div>
 
           <motion.h1
