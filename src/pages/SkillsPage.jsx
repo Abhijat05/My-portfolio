@@ -1,14 +1,17 @@
-import React from 'react'
-import transition from '../components/transition'
+import React from 'react';
+import { motion } from 'framer-motion';
+import Skills from '../components/Skills';
 
 const SkillsPage = () => {
   return (
-    <div>
-      <h1 className='text-4xl font-bold text-center mt-10'>
-        SkillsPage
-      </h1>
-    </div>
-  )
-}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Skills />
+    </motion.div>
+  );
+};
 
-export default transition(SkillsPage)
+export default SkillsPage;
